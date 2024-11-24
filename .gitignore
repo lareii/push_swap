@@ -1,0 +1,7 @@
+*.a
+*.o
+*.out
+*.dSYM
+push_swap
+
+build/
