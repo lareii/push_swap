@@ -1,43 +1,29 @@
-name: deploy website
+name: build & deploy
 
 on:
-  push:
-    branches: ['master']
   workflow_dispatch:
+  push:
+    branches:
+      - master
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: install & build
+        run: |
+          cd website
+          npm ci
+          npm run build
+
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          node-version: 20
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: website/dist
+          branch: production
