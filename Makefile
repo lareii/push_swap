@@ -20,6 +20,7 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR) bonus
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
 clean:
