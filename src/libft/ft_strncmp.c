@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebabaogl <ebabaogl@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 20:59:07 by ebabaogl          #+#    #+#             */
-/*   Updated: 2024/11/24 21:03:31 by ebabaogl         ###   ########.fr       */
+/*   Created: 2024/10/09 16:55:43 by ebabaogl          #+#    #+#             */
+/*   Updated: 2024/10/17 22:14:03 by ebabaogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
 
-int	main(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	ft_putstr_fd("hello world", 1);
+	while (n--)
+	{
+		if (!*s1 || !*s2 || *s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+	}
+	return (0);
 }
